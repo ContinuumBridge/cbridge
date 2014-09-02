@@ -1,0 +1,56 @@
+#!/bin/bash
+# /etc/init.d/cbridge
+
+### BEGIN INIT INFO
+# Provides:          cbridgge`
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Simple script to start a program at boot
+# Description:       A simple script from www.stuffaboutcode.com which will start / stop a program a boot / shutdown.
+### END INIT INFO
+
+# If you want a command to always run, put it here
+NAME=cbridge
+BRIDGEPATH=/home/bridge
+THISBRIDGE=$BRIDGEPATH'/thisbridge/thisbridge.sh'
+PIDFILE=/var/run/$NAME.pid
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+  start)
+	echo -n "Starting cbridge: "
+        cd $BRIDGEPATH'/bridge/manager'
+        if [ -f $THISBRIDGE ]; then
+            # Must source so that exports affect the parent script
+            source $THISBRIDGE
+            export PYTHONPATH=$BRIDGEPATH'/bridge/lib'
+            ./cbsupervisor.py >> $BRIDGEPATH'/thisbridge/shell.log' 2>&1 &
+            cb_pid=$!
+            echo $cb_pid > $PIDFILE
+            echo 'done'
+        else
+            echo "thisbridge.sh file does not exist"
+        exit
+        fi
+	;;
+  stop)
+	echo -n "Stopping cbridge: "
+	start-stop-daemon --stop --signal 2 --quiet --pidfile $PIDFILE
+	rm $PIDFILE
+	echo "done."
+	;;
+  restart)
+	echo "Restarting cbridge: "
+	sh $0 stop
+	sleep 10
+	sh $0 start
+	;;
+  *)
+    echo "Usage: /etc/init.d/noip {start|stop|restart}"
+    exit 1
+    ;;
+esac
+
+exit 0
