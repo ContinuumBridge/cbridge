@@ -1,32 +1,32 @@
 #!/bin/bash
 
-sudo apt-get install -y python-dev
-sudo apt-get install -y python-pip
-sudo apt-get install -y python-software-properties
-#sudo apt-get install -y nodejs npm node-semver
-sudo apt-get install -y python-pexpect
-sudo apt-get install -y python-twisted
-sudo pip install httplib2
+apt-get install -y python-dev
+apt-get install -y python-pip
+apt-get install -y python-software-properties
+#apt-get install -y nodejs npm node-semver
+apt-get install -y python-pexpect
+apt-get install -y python-twisted
+pip install httplib2
 #pip install dataset
-sudo pip install dropbox
-sudo pip install procname
-sudo pip install requests
-sudo pip install flask-peewee
+pip install dropbox
+pip install procname
+pip install requests
+pip install flask-peewee
 
 # For Bluetooth LE
-sudo apt-get install -y libglib2.0-dev 
-sudo apt-get install -y libdbus-1-dev 
-sudo apt-get install -y libusb-dev 
-sudo apt-get install -y libudev-dev 
-sudo apt-get install -y libical-dev
-sudo apt-get install -y systemd 
-sudo apt-get install -y libreadline-dev
+apt-get install -y libglib2.0-dev 
+apt-get install -y libdbus-1-dev 
+apt-get install -y libusb-dev 
+apt-get install -y libudev-dev 
+apt-get install -y libical-dev
+apt-get install -y systemd 
+apt-get install -y libreadline-dev
 
-sudo apt-get install -y screen
-sudo apt-get install -y hostapd
-sudo apt-get install -y hostap-utils
-sudo apt-get install -y iw
-sudo apt-get install -y dnsmasq
+apt-get install -y screen
+apt-get install -y hostapd
+apt-get install -y hostap-utils
+apt-get install -y iw
+apt-get install -y dnsmasq
 
 # Bluetooth
 mkdir ~/src
@@ -35,26 +35,28 @@ wget https://www.kernel.org/pub/linux/bluetooth/bluez-5.14.tar.gz
 tar xvfz bluez-5.14.tar.gz
 cd bluez-5.14.tar.gz
 ./configure --prefix=/usr --mandir=/usr/share/man --sysconfdir=/etc --localstatedir=/var --disable-systemd
-sudo make
-sudo make install
+make
+make install
 # Not done by install for this version
-sudo cp ~/src/bluez-5.14/tools/hcitool /usr/bin/hcitool
-sudo cp ~/src/bluez-5.14/attrib/gatttool /usr/bin/gatttool
+cp ~/src/bluez-5.14/tools/hcitool /usr/bin/hcitool
+cp ~/src/bluez-5.14/attrib/gatttool /usr/bin/gatttool
 
 # nodejs
-cd /home/bridge/src
-sudo mkdir /opt/node
+cd ~/src
+mkdir /opt/node
 wget http://nodejs.org/dist/v0.10.28/node-v0.10.28-linux-arm-pi.tar.gz
 tar xvzf node-v0.10.28-linux-arm-pi.tar.gz
-sudo sudo cp -r node-v0.10.28-linux-arm-pi/* /opt/node
-sudo echo -e "NODE_JS_HOME=\"/opt/node\"\nPATH=\"\$PATH:\$NODE_JS_HOME/bin\"\nexport PATH" > /etc/profile.d/nodejs.sh
+cp -r node-v0.10.28-linux-arm-pi/* /opt/node
+echo -e "NODE_JS_HOME=\"/opt/node\"\nPATH=\"\$PATH:\$NODE_JS_HOME/bin\"\nexport PATH" > /etc/profile.d/nodejs.sh
 
 # bridge software
+mkdir /opt/cbridge
+cd /opt/cbridge
 wget https://github.com/ContinuumBridge/cbridge/releases/download/v0.0.1/bridge_clone.tar.gz
 tar xfz bridge_clone.tar.gz
 mv bridge_clone bridge
-mkdir ~thisbridge
+mkdir thisbridge
 echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"54.72.38.223\"\nexport CB_NODE_CONTROLLER_ADDR=\"54.72.38.223:3000\"" > ~/thisbridge/thisbridge.sh
-sudo cp cbridge /etc/init.d/cbridge
-sudo chmod 755 /etc/init.d/cbridge
-sudo update-rc.d cbridge defaults
+cp cbridge /etc/init.d/cbridge
+chmod 755 /etc/init.d/cbridge
+update-rc.d cbridge defaults
