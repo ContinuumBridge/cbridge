@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Must be run as root
+if [ "$(id -u)" != "0" ]; then
+    echo "This script should be run as 'root'. Type: sudo cbridge/setup"
+    exit 1
+fi
+
 # Ensure everything is up to date
 apt-get upgrade
 apt-get update
@@ -61,8 +67,9 @@ wget https://github.com/ContinuumBridge/cbridge/releases/download/v0.0.1/bridge_
 tar xfz bridge_clone.tar.gz
 mv bridge_clone bridge
 mkdir thisbridge
-echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"54.72.38.223\"\nexport CB_NODE_CONTROLLER_ADDR=\"54.72.38.223:3000\"" > ~/thisbridge/thisbridge.sh
-echo -e "export CB_DROPBOX_TOKEN=\"Dzl1HqI0MDEAAAAAAAAAAdR67r0pNVDNIYupKDiJ3Im7punvoqFXf5IAjqEMQ80e\"" >> ~/thisbridge/thisbridge.sh
-cp cbridge /etc/init.d/cbridge
+echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"54.72.38.223\"\nexport CB_NODE_CONTROLLER_ADDR=\"54.72.38.223:3000\"" > thisbridge/thisbridge.sh
+echo -e "export CB_DROPBOX_TOKEN=\"Dzl1HqI0MDEAAAAAAAAAAdR67r0pNVDNIYupKDiJ3Im7punvoqFXf5IAjqEMQ80e\"" >> thisbridge/thisbridge.sh
+cp bridge/scripts/cbridge /etc/init.d/cbridge
+cp bridge/scripts/cb /usr/bin/cb
 chmod 755 /etc/init.d/cbridge
 update-rc.d cbridge defaults
