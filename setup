@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Ensure everything is up to date
+apt-get upgrade
+apt-get update
+rpi-update
+
 apt-get install -y python-dev
 apt-get install -y python-pip
 apt-get install -y python-software-properties
@@ -33,7 +38,7 @@ mkdir ~/src
 cd ~/src
 wget https://www.kernel.org/pub/linux/bluetooth/bluez-5.14.tar.gz
 tar xvfz bluez-5.14.tar.gz
-cd bluez-5.14.tar.gz
+cd bluez-5.14
 ./configure --prefix=/usr --mandir=/usr/share/man --sysconfdir=/etc --localstatedir=/var --disable-systemd
 make
 make install
@@ -57,6 +62,7 @@ tar xfz bridge_clone.tar.gz
 mv bridge_clone bridge
 mkdir thisbridge
 echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"54.72.38.223\"\nexport CB_NODE_CONTROLLER_ADDR=\"54.72.38.223:3000\"" > ~/thisbridge/thisbridge.sh
+echo -e "export CB_DROPBOX_TOKEN=\"Dzl1HqI0MDEAAAAAAAAAAdR67r0pNVDNIYupKDiJ3Im7punvoqFXf5IAjqEMQ80e\"" >> ~/thisbridge/thisbridge.sh
 cp cbridge /etc/init.d/cbridge
 chmod 755 /etc/init.d/cbridge
 update-rc.d cbridge defaults
