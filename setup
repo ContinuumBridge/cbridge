@@ -70,8 +70,8 @@ cd /opt/cbridge
 wget https://github.com/ContinuumBridge/cbridge/releases/download/v0.0.1/bridge_clone.tar.gz
 tar xfz bridge_clone.tar.gz
 mv bridge_clone bridge
-cp bridge/scripts/cbridge /etc/init.d/cbridge
 cp bridge/scripts/cb /usr/bin/cb
+cp bridge/scripts/cbridge /etc/init.d/cbridge
 chmod 755 /etc/init.d/cbridge
 update-rc.d cbridge defaults
 
@@ -79,6 +79,6 @@ update-rc.d cbridge defaults
 mkdir thisbridge
 chown $REALNAME:$REALGROUP thisbridge
 cd thisbridge
-echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"54.72.38.223\"\nexport CB_NODE_CONTROLLER_ADDR=\"54.72.38.223:3000\"" > thisbridge.sh
+echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"54.194.28.63\"\nexport CB_NODE_CONTROLLER_ADDR=\"54.194.28.63:3000\"" > thisbridge.sh
 echo -e "export CB_DROPBOX_TOKEN=\"Dzl1HqI0MDEAAAAAAAAAAdR67r0pNVDNIYupKDiJ3Im7punvoqFXf5IAjqEMQ80e\"" >> thisbridge.sh
 chown $REALNAME:$REALGROUP thisbridge.sh
