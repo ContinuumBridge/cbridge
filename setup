@@ -67,7 +67,7 @@ REALGROUP=$(id -Gn $REALNAME)
 mkdir /opt/cbridge
 chown $REALNAME:$REALGROUP /opt/cbridge
 cd /opt/cbridge
-wget https://github.com/ContinuumBridge/cbridge/releases/download/v0.0.1/bridge_clone.tar.gz
+wget https://github.com/ContinuumBridge/cbridge/releases/download/v1.0.0/bridge_clone.tar.gz
 tar xfz bridge_clone.tar.gz
 mv bridge_clone bridge
 cp bridge/scripts/cb /usr/bin/cb
