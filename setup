@@ -6,24 +6,21 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-# Ensure everything is up to date
-apt-get upgrade
-apt-get update
-rpi-update
-
+# Python packages
 apt-get install -y python-dev
 apt-get install -y python-pip
 apt-get install -y python-software-properties
-#apt-get install -y nodejs npm node-semver
 apt-get install -y python-pexpect
 apt-get install -y python-twisted
 pip install httplib2
-#pip install dataset
 pip install dropbox
 pip install procname
 pip install requests
 pip install flask-peewee
 pip install click
+
+# Useful utilities
+apt-get install -y screen
 
 # For Bluetooth LE
 apt-get install -y libglib2.0-dev 
@@ -34,7 +31,8 @@ apt-get install -y libical-dev
 apt-get install -y systemd 
 apt-get install -y libreadline-dev
 
-apt-get install -y screen
+
+# WiFi
 apt-get install -y hostapd
 apt-get install -y hostap-utils
 apt-get install -y iw
