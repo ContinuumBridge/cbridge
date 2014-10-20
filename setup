@@ -21,6 +21,7 @@ pip install click
 
 # Useful utilities
 apt-get install -y screen
+apt-get install -y vim
 
 # For Bluetooth LE
 apt-get install -y libglib2.0-dev 
@@ -77,6 +78,6 @@ update-rc.d cbridge defaults
 mkdir thisbridge
 chown $REALNAME:$REALGROUP thisbridge
 cd thisbridge
-echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"54.194.28.63\"\nexport CB_NODE_CONTROLLER_ADDR=\"54.194.28.63:3000\"" > thisbridge.sh
+echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"54.76.145.70\"\nexport CB_NODE_CONTROLLER_ADDR=\"54.76.145.70\"" > thisbridge.sh
 echo -e "export CB_DROPBOX_TOKEN=\"Dzl1HqI0MDEAAAAAAAAAAdR67r0pNVDNIYupKDiJ3Im7punvoqFXf5IAjqEMQ80e\"" >> thisbridge.sh
 chown $REALNAME:$REALGROUP thisbridge.sh
