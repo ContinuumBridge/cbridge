@@ -60,6 +60,13 @@ tar xvzf node-v0.10.28-linux-arm-pi.tar.gz
 cp -r node-v0.10.28-linux-arm-pi/* /opt/node
 echo -e "NODE_JS_HOME=\"/opt/node\"\nPATH=\"\$PATH:\$NODE_JS_HOME/bin\"\nexport PATH" > /etc/profile.d/nodejs.sh
 
+# 3G modem software
+cd ~/src
+apt-get install -y sg3-utils
+wget "http://raspberry-at-home.com/files/sakis3g.tar.gz"
+cp sakis3g /usr/bin/sakis3g
+apt-get install -y ppp
+
 # bridge software
 REALNAME=$(logname)
 REALGROUP=$(id -Gn $REALNAME)
@@ -81,3 +88,8 @@ cd thisbridge
 echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"54.76.145.70\"\nexport CB_NODE_CONTROLLER_ADDR=\"54.76.145.70\"" > thisbridge.sh
 echo -e "export CB_DROPBOX_TOKEN=\"Dzl1HqI0MDEAAAAAAAAAAdR67r0pNVDNIYupKDiJ3Im7punvoqFXf5IAjqEMQ80e\"" >> thisbridge.sh
 chown $REALNAME:$REALGROUP thisbridge.sh
+
+# Change max current on USB (for 3G modem)
+echo -e "# Change max USB current to support USB modems" >> /boot/config.txt
+echo -e "safe_mode_gpio=4" >> /boot/config.txt
+echo -e "max_usb_current=1" >> /boot/config.txt
