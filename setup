@@ -18,6 +18,7 @@ pip install procname
 pip install requests
 pip install flask-peewee
 pip install click
+pip install websocket-client
 
 # Useful utilities
 apt-get install -y screen
@@ -31,7 +32,6 @@ apt-get install -y libudev-dev
 apt-get install -y libical-dev
 apt-get install -y systemd 
 apt-get install -y libreadline-dev
-
 
 # WiFi
 apt-get install -y hostapd
@@ -64,6 +64,7 @@ echo -e "NODE_JS_HOME=\"/opt/node\"\nPATH=\"\$PATH:\$NODE_JS_HOME/bin\"\nexport 
 cd ~/src
 apt-get install -y sg3-utils
 wget "http://raspberry-at-home.com/files/sakis3g.tar.gz"
+tar xfz sakis3g.tar.gz
 cp sakis3g /usr/bin/sakis3g
 apt-get install -y ppp
 
@@ -85,7 +86,7 @@ update-rc.d cbridge defaults
 mkdir thisbridge
 chown $REALNAME:$REALGROUP thisbridge
 cd thisbridge
-echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"54.76.145.70\"\nexport CB_NODE_CONTROLLER_ADDR=\"54.76.145.70\"" > thisbridge.sh
+echo -e "export CB_DJANGO_CONTROLLER_ADDR=\"portal.continuumbridge.com\"\nexport CB_NODE_CONTROLLER_ADDR=\"portal.continuumbridge.com\"" > thisbridge.sh
 echo -e "export CB_DROPBOX_TOKEN=\"Dzl1HqI0MDEAAAAAAAAAAdR67r0pNVDNIYupKDiJ3Im7punvoqFXf5IAjqEMQ80e\"" >> thisbridge.sh
 chown $REALNAME:$REALGROUP thisbridge.sh
 
