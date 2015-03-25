@@ -59,6 +59,7 @@ wget http://nodejs.org/dist/v0.10.28/node-v0.10.28-linux-arm-pi.tar.gz
 tar xvzf node-v0.10.28-linux-arm-pi.tar.gz
 cp -r node-v0.10.28-linux-arm-pi/* /opt/node
 echo -e "NODE_JS_HOME=\"/opt/node\"\nPATH=\"\$PATH:\$NODE_JS_HOME/bin\"\nexport PATH" > /etc/profile.d/nodejs.sh
+apt-get install python-bluez
 
 # 3G modem software
 cd ~/src
