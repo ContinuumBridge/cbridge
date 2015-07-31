@@ -82,6 +82,8 @@ cp bridge/scripts/cb /usr/bin/cb
 cp bridge/scripts/cbridge /etc/init.d/cbridge
 chmod 755 /etc/init.d/cbridge
 update-rc.d cbridge defaults
+# File systems that are written to a lot are kept in RAM:
+cp bridge/scripts/fstab /etc/fstab
 
 # Create thisbridge.sh file
 mkdir thisbridge
@@ -95,3 +97,8 @@ chown $REALNAME:$REALGROUP thisbridge.sh
 echo -e "# Change max USB current to support USB modems" >> /boot/config.txt
 echo -e "safe_mode_gpio=4" >> /boot/config.txt
 echo -e "max_usb_current=1" >> /boot/config.txt
+
+# Stop automatic NTP. This is done by the bridge one a day:
+update-rc.d -f  ntp remove
+pkill ntpd
+
