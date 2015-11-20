@@ -6,9 +6,18 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
+# Remove unnecessary packages
+apt-get purge xserver* -y
+apt-get purge ^x11 -y
+apt-get purge samba* -y
+apt-get purge libreoffice* -y
+apt-get autoremove -y
+apt-get upgrade -y
+apt-get clean
+
 # Python packages
 apt-get install -y python-dev
-apt-get install -y python-pip
+easy_install pip
 apt-get install -y python-software-properties
 apt-get install -y python-pexpect
 apt-get install -y python-twisted
@@ -42,15 +51,15 @@ apt-get install -y dnsmasq
 # Bluetooth
 mkdir ~/src
 cd ~/src
-wget https://www.kernel.org/pub/linux/bluetooth/bluez-5.14.tar.gz
-tar xvfz bluez-5.14.tar.gz
-cd bluez-5.14
+wget https://www.kernel.org/pub/linux/bluetooth/bluez-5.36.tar.gz
+tar xvfz bluez-5.36.tar.gz
+cd bluez-5.36
 ./configure --prefix=/usr --mandir=/usr/share/man --sysconfdir=/etc --localstatedir=/var --disable-systemd
 make
 make install
 # Not done by install for this version
-cp ~/src/bluez-5.14/tools/hcitool /usr/bin/hcitool
-cp ~/src/bluez-5.14/attrib/gatttool /usr/bin/gatttool
+cp ~/src/bluez-5.36/tools/hcitool /usr/bin/hcitool
+cp ~/src/bluez-5.36/attrib/gatttool /usr/bin/gatttool
 
 # nodejs
 cd ~/src
@@ -59,7 +68,6 @@ wget http://nodejs.org/dist/v0.10.28/node-v0.10.28-linux-arm-pi.tar.gz
 tar xvzf node-v0.10.28-linux-arm-pi.tar.gz
 cp -r node-v0.10.28-linux-arm-pi/* /opt/node
 echo -e "NODE_JS_HOME=\"/opt/node\"\nPATH=\"\$PATH:\$NODE_JS_HOME/bin\"\nexport PATH" > /etc/profile.d/nodejs.sh
-apt-get install python-bluez
 
 # 3G modem software
 cd ~/src
@@ -88,6 +96,11 @@ cp bridge/scripts/fstab /etc/fstab
 cp bridge/scripts/z-way-server.logrotate /etc/logrotate.d/z-way-server
 cp bridge/scripts/rsyslog.logrotate /etc/logrotate.d/rsyslog
 cp bridge/scripts/cbshell.logrotate /etc/logrotate.d/cbshell
+# sakis3g config file
+cp bridge/scripts/sakis3g.conf /etc/sakis3g.conf
+
+# Fix for z-way-server 
+ln -s /usr/lib/arm-linux-gnueabihf/libarchive.so.13.1.2 /usr/lib/arm-linux-gnueabihf/libarchive.so.12
 
 # Create thisbridge.sh file
 mkdir thisbridge
