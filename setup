@@ -97,7 +97,7 @@ cp bridge/scripts/z-way-server.logrotate /etc/logrotate.d/z-way-server
 cp bridge/scripts/rsyslog.logrotate /etc/logrotate.d/rsyslog
 cp bridge/scripts/cbshell.logrotate /etc/logrotate.d/cbshell
 # sakis3g config file
-cp bridge/scripts/sakis3g.conf /etc/sakis3g.conf
+cp bridge/bridgeconfig/sakis3g.conf /etc/sakis3g.conf
 
 # Fix for z-way-server 
 ln -s /usr/lib/arm-linux-gnueabihf/libarchive.so.13.1.2 /usr/lib/arm-linux-gnueabihf/libarchive.so.12
