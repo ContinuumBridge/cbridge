@@ -9,9 +9,14 @@ fi
 # Python packages
 apt-get install -y python-dev
 apt-get install -y python-pip
+sudo easy_install --upgrade pip
 apt-get install -y python-software-properties
 apt-get install -y python-pexpect
-apt-get install -y python-twisted
+apt-get install libffi-dev
+pip install Twisted
+pip install autobahn
+pip install pyOpenSSL
+pip install service_identity
 pip install httplib2
 pip install dropbox
 pip install procname
@@ -21,7 +26,6 @@ pip install click
 pip install websocket-client
 
 # Useful utilities
-apt-get install -y screen
 apt-get install -y vim
 
 # For Bluetooth LE
