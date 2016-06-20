@@ -13,6 +13,7 @@ sudo easy_install --upgrade pip
 apt-get install -y python-software-properties
 apt-get install -y python-pexpect
 apt-get install libffi-dev
+pip install python-serial
 pip install Twisted
 pip install autobahn
 pip install pyOpenSSL
