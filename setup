@@ -25,6 +25,7 @@ pip install requests
 pip install flask-peewee
 pip install click
 pip install websocket-client
+pip install pysftp
 
 # Useful utilities
 apt-get install -y vim
