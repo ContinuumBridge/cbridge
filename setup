@@ -13,6 +13,7 @@ apt-get install -y python-software-properties
 apt-get install -y python-pexpect
 apt-get install -y python-twisted
 pip install httplib2
+pip install pysftp
 pip install dropbox
 pip install procname
 pip install requests
